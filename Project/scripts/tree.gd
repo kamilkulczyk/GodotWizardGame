@@ -1,6 +1,6 @@
 extends StaticBody2D
 
-signal flame_emiter_object(pos)
+signal flame_emitter_object(pos)
 
 var flame_scene: PackedScene = load("res://Scenes/Flame.tscn")
 
@@ -10,6 +10,7 @@ var health = 60
 var player_in_attack_zone = false
 var can_take_damage = true
 var is_getting_damage = false
+# TODO: decide if tree should lay always down or with direction of a hit.
 var direction_to_fall = "down"
 var is_shaded = false
 
@@ -38,7 +39,7 @@ func react_on_spell(spell):
 	# TODO: check missile/attack specific, what does it do.
 	# For example: ice spell shouldnt damage
 	if spell.spell_nr == 1:
-		flame_emiter_object.emit(Vector2(0,0))
+		flame_emitter_object.emit(Vector2.ZERO)
 	elif spell.spell_nr == 2:
 		for child in get_children():
 			if child is Flame:
@@ -64,7 +65,7 @@ func _on_tree_take_damage_cooldown_timeout() -> void:
 func _on_tree_damage_shader_timeout() -> void:
 	is_shaded = false
 
-func _on_flame_emiter_object(pos) -> void:
+func _on_flame_emitter_object(pos) -> void:
 	var flame = flame_scene.instantiate()
 	flame.position = pos
 	add_child(flame)

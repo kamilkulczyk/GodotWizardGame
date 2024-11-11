@@ -31,10 +31,7 @@ collision_mask = 6
 position = Vector2(0, 16.5)
 shape = SubResource("RectangleShape2D_v5ku7")
 
-[node name="Flame_emitter" type="Node2D" parent="."]
+[node name="Flame_emiter" type="Node2D" parent="."]
 
-[node name="time_from_fall" type="Timer" parent="."]
-
-[connection signal="flame_emitter_object" from="." to="." method="_on_flame_emitter_object"]
+[connection signal="flame_emiter_object" from="." to="." method="_on_flame_emiter_object"]
 [connection signal="body_entered" from="fallen_tree_hitbox" to="." method="_on_fallen_tree_hitbox_body_entered"]
-[connection signal="timeout" from="time_from_fall" to="." method="_on_time_from_fall_timeout"]

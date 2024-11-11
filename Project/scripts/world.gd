@@ -14,6 +14,7 @@ func _on_player_spell_missile_object(position, direction, spell_nr) -> void:
 func _on_tree_fallen_tree_object(position, direction) -> void:
 	var fallen_tree = fallen_tree_scene.instantiate()
 	fallen_tree.position = position
+	# TODO: coppied issue: decide if tree should lay always down or with direction of a hit.
 	#fallen_tree.direction = direction
-	$Fallen_tree_emiter.add_child(fallen_tree)
+	$Fallen_tree_emitter.add_child(fallen_tree)
 	fallen_tree.connect("flame_emiter_object", Callable(self, "_on_fallen_tree_flame_emiter_object"))

@@ -37,11 +37,12 @@ wait_time = 0.5
 [node name="tree_damage_shader" type="Timer" parent="."]
 wait_time = 0.1
 
-[node name="Flame_emiter" type="Node2D" parent="."]
+[node name="Flame_emitter" type="Node2D" parent="."]
 
 [node name="Flamable" parent="." instance=ExtResource("3_0vx01")]
+script = null
 
-[connection signal="flame_emiter_object" from="." to="." method="_on_flame_emiter_object"]
+[connection signal="flame_emitter_object" from="." to="." method="_on_flame_emitter_object"]
 [connection signal="body_entered" from="tree_hitbox" to="." method="_on_tree_hitbox_body_entered"]
 [connection signal="body_exited" from="tree_hitbox" to="." method="_on_tree_hitbox_body_exited"]
 [connection signal="timeout" from="tree_take_damage_cooldown" to="." method="_on_tree_take_damage_cooldown_timeout"]

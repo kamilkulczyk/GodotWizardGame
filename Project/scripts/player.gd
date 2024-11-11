@@ -149,6 +149,8 @@ func _on_take_damage_cooldown_timeout() -> void:
 
 func attack() -> void:
 	# sword attack
+	# TODO: fix this attack or remove it. It shouldn't require timer on enemy/object
+	# to not get constantly hit. Spells work correctly.
 	if Input.is_action_just_pressed("attack"):
 		if attack_in_progress == false:
 			Global.player_current_attack = true
@@ -164,7 +166,6 @@ func attack() -> void:
 
 func cast_spell(spell_nr):
 	if spell_in_progress == false:
-			#Global.player_current_attack = true
 			spell_in_progress = true
 			if spell_in_progress:
 				# Move spell to in front of a player. 

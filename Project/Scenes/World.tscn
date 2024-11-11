@@ -148,7 +148,7 @@ position = Vector2(256, 123)
 
 [node name="Spell_missiles" type="Node2D" parent="."]
 
-[node name="Fallen_tree_emiter" type="Node2D" parent="."]
+[node name="Fallen_tree_emitter" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Tree" parent="." instance=ExtResource("8_2x2w5")]
@@ -160,13 +160,9 @@ position = Vector2(169, 82)
 [node name="Fallen_tree" parent="." instance=ExtResource("9_qwmki")]
 position = Vector2(69, 105)
 
-[node name="Flame_emiter" type="Node2D" parent="."]
-light_mask = 7
-visibility_layer = 7
-z_index = 1
+[node name="Enemy_emiter" type="Node2D" parent="."]
 
 [connection signal="spell_missile_object" from="Player" to="." method="_on_player_spell_missile_object"]
 [connection signal="spell_missile_object" from="Player" to="Player" method="_on_spell_missile_object"]
 [connection signal="fallen_tree_object" from="Tree" to="." method="_on_tree_fallen_tree_object"]
 [connection signal="fallen_tree_object" from="Tree2" to="." method="_on_tree_fallen_tree_object"]
-[connection signal="flame_emiter_object" from="Fallen_tree" to="." method="_on_fallen_tree_flame_emiter_object"]
