@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://42agjtvrm8x5"]
+
+[ext_resource type="Texture2D" uid="uid://d3l70l5xccp8h" path="res://art/tilesets/tree_fallen.png" id="1_2j5ou"]
+[ext_resource type="Script" path="res://scripts/fallen_tree.gd" id="1_dnu6i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_betd7"]
+size = Vector2(14, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5ku7"]
+size = Vector2(14, 33)
+
+[node name="Fallen_tree" type="CharacterBody2D"]
+z_index = 1
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_dnu6i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 14)
+texture = ExtResource("1_2j5ou")
+
+[node name="fallen_tree_collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16.5)
+shape = SubResource("RectangleShape2D_betd7")
+
+[node name="fallen_tree_hitbox" type="Area2D" parent="."]
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fallen_tree_hitbox"]
+position = Vector2(0, 16.5)
+shape = SubResource("RectangleShape2D_v5ku7")
+
+[node name="Flame_emiter" type="Node2D" parent="."]
+
+[node name="time_from_fall" type="Timer" parent="."]
+
+[connection signal="flame_emiter_object" from="." to="." method="_on_flame_emiter_object"]
+[connection signal="body_entered" from="fallen_tree_hitbox" to="." method="_on_fallen_tree_hitbox_body_entered"]
+[connection signal="timeout" from="time_from_fall" to="." method="_on_time_from_fall_timeout"]

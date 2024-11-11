@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b46r01u7507ac"]
+
+[ext_resource type="Script" path="res://flamable.gd" id="1_0dt3p"]
+
+[node name="Flamable" type="Node"]
+script = ExtResource("1_0dt3p")
+
+[node name="Flame_emiter" type="Node2D" parent="."]
+
+[connection signal="flame_emiter_object" from="." to="." method="_on_flame_emiter_object"]

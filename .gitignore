@@ -1,0 +1,12 @@
+# Godot specific
+.import/
+.godot/
+.vscode/
+export.cfg
+*.import
+.mono/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

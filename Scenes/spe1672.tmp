@@ -1,0 +1,144 @@
+[gd_scene load_steps=21 format=3 uid="uid://cyx1qngpc7o0l"]
+
+[ext_resource type="Script" path="res://scripts/spell_missile.gd" id="1_85cp5"]
+[ext_resource type="Texture2D" uid="uid://c2vpagwd3jnea" path="res://art/particles/Fire Effect and Bullet 16x16.png" id="1_kkj24"]
+[ext_resource type="Texture2D" uid="uid://c5xhusj1whkg4" path="res://art/particles/Water Effect and Bullet 16x16.png" id="3_vxwxr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3lnu"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(224, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo31u"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(240, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_402bn"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(256, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0yxf"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(272, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxk22"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(480, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgaqn"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(496, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wnubq"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(512, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0uyo"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(528, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15b3r"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(544, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1nvh"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(560, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5e0rn"]
+atlas = ExtResource("3_vxwxr")
+region = Rect2(224, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwrm3"]
+atlas = ExtResource("3_vxwxr")
+region = Rect2(240, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wifmk"]
+atlas = ExtResource("3_vxwxr")
+region = Rect2(256, 144, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_av5on"]
+atlas = ExtResource("3_vxwxr")
+region = Rect2(272, 144, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77wf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3lnu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo31u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_402bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0yxf")
+}],
+"loop": true,
+"name": &"fire_ends",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxk22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgaqn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wnubq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0uyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15b3r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1nvh")
+}],
+"loop": true,
+"name": &"fire_shuriken",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5e0rn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwrm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wifmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_av5on")
+}],
+"loop": true,
+"name": &"ice_shuriken",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2cdaa"]
+radius = 8.06226
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_asprh"]
+radius = 8.0
+
+[node name="Spell_missile" type="CharacterBody2D"]
+script = ExtResource("1_85cp5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_77wf4")
+animation = &"ice_shuriken"
+
+[node name="missile_hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="missile_hitbox"]
+shape = SubResource("CircleShape2D_2cdaa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_asprh")
+
+[connection signal="body_entered" from="missile_hitbox" to="." method="_on_missile_hitbox_body_entered"]

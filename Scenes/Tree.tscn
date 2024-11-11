@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdwpr3cly7cxa"]
+
+[ext_resource type="Script" path="res://scripts/tree.gd" id="1_argmh"]
+[ext_resource type="Texture2D" uid="uid://cp05bb1ivhwye" path="res://art/tilesets/tree_stands.png" id="1_xsm2p"]
+[ext_resource type="PackedScene" uid="uid://b46r01u7507ac" path="res://Scenes/Flamable.tscn" id="3_0vx01"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txbqk"]
+size = Vector2(12, 11)
+
+[node name="Tree" type="StaticBody2D"]
+z_index = 1
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_argmh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -17)
+texture = ExtResource("1_xsm2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_txbqk")
+
+[node name="tree_hitbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="area" type="CollisionPolygon2D" parent="tree_hitbox"]
+position = Vector2(-1, -6)
+scale = Vector2(2.64732, 3.34863)
+polygon = PackedVector2Array(5.51196, 6.04724, 5.51196, -1.51181, -4.89952, -1.51181, -4.89952, 6.04724)
+
+[node name="tree_take_damage_cooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="center_marker" type="Marker2D" parent="."]
+
+[node name="tree_damage_shader" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Flame_emiter" type="Node2D" parent="."]
+
+[node name="Flamable" parent="." instance=ExtResource("3_0vx01")]
+
+[connection signal="flame_emiter_object" from="." to="." method="_on_flame_emiter_object"]
+[connection signal="body_entered" from="tree_hitbox" to="." method="_on_tree_hitbox_body_entered"]
+[connection signal="body_exited" from="tree_hitbox" to="." method="_on_tree_hitbox_body_exited"]
+[connection signal="timeout" from="tree_take_damage_cooldown" to="." method="_on_tree_take_damage_cooldown_timeout"]
+[connection signal="timeout" from="tree_damage_shader" to="." method="_on_tree_damage_shader_timeout"]

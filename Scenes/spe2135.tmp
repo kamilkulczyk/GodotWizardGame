@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyx1qngpc7o0l"]
+
+[ext_resource type="Script" path="res://Scenes/spell_missile.gd" id="1_85cp5"]
+[ext_resource type="Texture2D" uid="uid://c2vpagwd3jnea" path="res://art/particles/Fire Effect and Bullet 16x16.png" id="1_kkj24"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d1lv3"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(224, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rmmtf"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(240, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rxoy"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(256, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t80ej"]
+atlas = ExtResource("1_kkj24")
+region = Rect2(272, 64, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_77wf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d1lv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rmmtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rxoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t80ej")
+}],
+"loop": true,
+"name": &"fire_shuriken",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2cdaa"]
+radius = 8.06226
+
+[node name="Spell_missile" type="Area2D"]
+script = ExtResource("1_85cp5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_77wf4")
+animation = &"fire_shuriken"
+frame_progress = 0.570914
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2cdaa")

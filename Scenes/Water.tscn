@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://emdecg10dq6"]
+
+[ext_resource type="Script" path="res://scripts/water.gd" id="1_nv64n"]
+[ext_resource type="Texture2D" uid="uid://woh2tcuk54kb" path="res://art/tilesets/white.png" id="2_k04ua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxrb6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_orslq"]
+size = Vector2(6.75, 6)
+
+[node name="Water" type="StaticBody2D"]
+script = ExtResource("1_nv64n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k04ua")
+
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("RectangleShape2D_rxrb6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_orslq")
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_area_2d_body_entered"]
