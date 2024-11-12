@@ -13,6 +13,7 @@ var is_getting_damage = false
 # TODO: decide if tree should lay always down or with direction of a hit.
 var direction_to_fall = "down"
 var is_shaded = false
+var is_on_fire = false
 
 signal fallen_tree_object(pos)
 
@@ -39,8 +40,9 @@ func react_on_spell(spell):
 	# TODO: check missile/attack specific, what does it do.
 	# For example: ice spell shouldnt damage
 	if spell.spell_nr == 1:
-		flame_emitter_object.emit(Vector2.ZERO)
+		flamable()
 	elif spell.spell_nr == 2:
+		is_on_fire = false
 		for child in get_children():
 			if child is Flame:
 				child.queue_free()
@@ -69,3 +71,9 @@ func _on_flame_emitter_object(pos) -> void:
 	var flame = flame_scene.instantiate()
 	flame.position = pos
 	add_child(flame)
+	
+func flamable():
+	if is_on_fire:
+		return
+	is_on_fire = true
+	flame_emitter_object.emit(Vector2.ZERO)

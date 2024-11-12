@@ -12,7 +12,13 @@ var health = 100
 var player_in_attack_zone = false
 var can_take_damage = true
 
+# TODO: actually everything
+# how it interacts with the environment
+# what does it do and how does it behave when damaged e.g. is in area of fire
+# should there be more enemy types with a basic enemy class?
+
 func _ready() -> void:
+	add_to_group("enemies")
 	$AnimatedSprite2D.play("idle")
 
 func _physics_process(delta: float) -> void:
@@ -78,6 +84,7 @@ func _on_enemy_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_in_attack_zone = false
 
+# TODO: deal with a strange conditioning and variable names
 func deal_with_damage() -> void:
 	if (player_in_attack_zone and Global.player_current_attack == true) or is_getting_damage:
 		if can_take_damage == true:
@@ -93,6 +100,7 @@ func deal_with_damage() -> void:
 		modulate = Color(1,1,1)
 	
 	if health <= 0:
+		remove_from_group("enemies")
 		self.queue_free()
 
 func _on_take_damage_cooldown_timeout() -> void:
@@ -100,3 +108,6 @@ func _on_take_damage_cooldown_timeout() -> void:
 
 func _on_demage_shader_timeout() -> void:
 	is_shaded = false
+
+func flamable():
+	is_getting_damage = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuyuej8ak3wn6"]
+[gd_scene load_steps=9 format=3 uid="uid://cuyuej8ak3wn6"]
 
 [ext_resource type="Script" path="res://scripts/flame.gd" id="1_quqam"]
 [ext_resource type="Texture2D" uid="uid://c2vpagwd3jnea" path="res://art/particles/Fire Effect and Bullet 16x16.png" id="1_tib3b"]
@@ -39,11 +39,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_afoe7"]
+radius = 16.0312
+
 [node name="Flame" type="Node2D"]
-z_index = -1
+z_as_relative = false
 script = ExtResource("1_quqam")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_ekcm4")
 frame_progress = 0.873374
+
+[node name="flamable_area" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flamable_area"]
+shape = SubResource("CircleShape2D_afoe7")
+
+[connection signal="body_entered" from="flamable_area" to="." method="_on_flamable_area_body_entered"]
